@@ -10,8 +10,6 @@ class TodoList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var todos = <Todo>[];
-
     return Consumer<TodoProvider>(
       builder: (context, state, child) => ListView.builder(
           itemCount: state.unCompletedTodos.length,

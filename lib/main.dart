@@ -24,13 +24,17 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    Provider.of<TodoProvider>(context, listen: false).initSharedPreferences();
+    //  Provider.of<TodoProvider>(context, listen: false).initSharedPreferences();
   }
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<TodoProvider>(
-      create: (_) => TodoProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => TodoProvider(),
+        ),
+      ],
       child: MaterialApp(
         title: "Todo Application",
         home: const HomeView(),

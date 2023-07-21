@@ -8,11 +8,28 @@ class DetailScreens extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Column(
-      children: [
-        Text(todo.title),
-        Text(todo.description),
-      ],
+        child: Scaffold(
+      appBar: AppBar(
+        title: Column(
+          children: [
+            IconButton(
+              icon: const Icon(Icons
+                  .arrow_back_ios), // İconButton içinde göstermek istediğiniz ikon
+              onPressed: () {
+                Navigator.pop(context);
+                print("IconButton Tıklandı!");
+              },
+            ),
+            Text(todo.title),
+          ],
+        ),
+      ),
+      body: Column(
+        children: [
+          Text(todo.title),
+          Text(todo.description),
+        ],
+      ),
     ));
   }
 }
