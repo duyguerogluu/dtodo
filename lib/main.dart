@@ -4,15 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+void main() {
+  runApp(const MyApp(
+    title: '',
+  ));
+}
+
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key, required this.title}) : super(key: key);
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<MyApp> createState() => _MyAppState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyAppState extends State<MyApp> {
   SharedPreferences? sharedPreferences;
 
   @override
@@ -23,11 +29,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (BuildContext context) => TodoProvider(),
+    return ChangeNotifierProvider<TodoProvider>(
+      create: (_) => TodoProvider(),
       child: MaterialApp(
         title: "Todo Application",
-        home: HomeView(),
+        home: const HomeView(),
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),

@@ -1,5 +1,6 @@
-import 'package:dtodo/models/home_view_model.dart';
 import 'package:dtodo/models/todo.dart';
+import 'package:dtodo/providers/todo_provider.dart';
+import 'package:dtodo/widgets/todo_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,27 +19,12 @@ class HomeView extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Duygu ToDo "),
       ),
-      body: SafeArea(
+      body: const SafeArea(
         child: Column(
           children: [
-            Expanded(child:
-                Consumer<HomeViewModel>(builder: (context, state, child) {
-              return ListView.builder(
-                itemCount: state.allTodos.length,
-                itemBuilder: (context, index) {
-                  Todo todo = state.allTodos[index];
-                  return state.allTodos.isEmpty
-                      ? const Center(
-                          child: Text('0 Todos',
-                              style: TextStyle(color: Colors.black)),
-                        )
-                      : ListTile(
-                          title: Text(todo.title),
-                          subtitle: Text(todo.description ?? ''),
-                        );
-                },
-              );
-            }))
+            Expanded(
+              child: TodoList(),
+            ),
           ],
         ),
       ),
@@ -54,14 +40,23 @@ class HomeView extends StatelessWidget {
 
     Widget addButton = ElevatedButton(
       onPressed: () {
+        bool validResult = formKey.currentState!.validate();
         //create todo object
         Todo todo = Todo(
           titleController.text,
           descController.text,
           false,
         );
-        if (formKey.currentState!.validate()) {
-          Provider.of<HomeViewModel>(context, listen: false).addTodo(todo);
+
+        if (validResult == true) {
+          Provider.of<TodoProvider>(context, listen: false)
+              .addTodo(todo); //setstate yerine
+          titleController.text = '';
+          descController.text = '';
+          Navigator.pop(context);
+        } else {
+          Todo todo = Todo(titleController.text, descController.text, false);
+          Provider.of<TodoProvider>(context, listen: false).addTodo(todo);
           titleController.text = '';
           descController.text = '';
           Navigator.pop(context);

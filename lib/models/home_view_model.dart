@@ -27,7 +27,6 @@ class HomeViewModel extends ChangeNotifier {
   void removeTodo(Todo todo) {
     //find todo index
     int index = todos.indexOf(todo);
-    print(index);
 
     //remove from index todo
     todos.removeAt(index);
