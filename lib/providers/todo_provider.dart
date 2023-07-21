@@ -1,6 +1,5 @@
 import 'dart:collection';
 import 'dart:convert';
-import 'dart:typed_data';
 import 'package:dtodo/models/todo.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -50,7 +49,7 @@ class TodoProvider extends ChangeNotifier {
   //load data - SharedPreferences
   void loadDataToLocalStorage() {
     List<String>? spList = sharedPreferences!.getStringList('list');
-    //todos = spList!.map((item) => Todo.fromMap(json.decode(item))).toList();
+    todos = spList!.map((item) => Todo.fromMap(json.decode(item))).toList();
   }
 
   //update data - SharedPreferences
