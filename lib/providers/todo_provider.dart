@@ -22,6 +22,7 @@ class TodoProvider extends ChangeNotifier {
 
   void removeTodo(Todo todo) {
     todos.remove(todo);
+    print('Removed!');
     notifyListeners();
     updateDataToLocalStorage();
   }
@@ -29,6 +30,7 @@ class TodoProvider extends ChangeNotifier {
   void toggleTodo(Todo todo) {
     var index = todos.indexOf(
         todo); //kullanıcının bana verdiği todonun indexini todos listesinde bulup index değişkenine atıyo
+    print('Completed');
     todos[index].completedTodo(); // dokunduğumuzun tamamlanmasını değiştircek
     notifyListeners();
   }
